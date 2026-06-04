@@ -1,0 +1,22 @@
+# dependencias
+node_modules/
+
+# compilaciones locales y expo
+.expo/
+dist/
+web-build/
+/android
+/ios
+
+# entornos locales
+.env*
+server/.env*
+
+# base de datos local
+*.db
+*.sqlite3
+
+# caches
+.npm/
+.yarn/
+*.log

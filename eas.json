@@ -10,7 +10,8 @@
     "preview": {
       "distribution": "internal",
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease --max-workers=1"
       },
       "env": {
         "EXPO_PUBLIC_API_URL": "https://flowplan-back.onrender.com",

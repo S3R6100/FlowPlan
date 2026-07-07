@@ -6,7 +6,7 @@ import { Colors } from '@/constants/theme';
 
 export default function AppTabs() {
   const scheme = useColorScheme();
-  const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
+  const colors = Colors[((scheme as string) === 'unspecified' || !scheme) ? 'light' : scheme as 'light' | 'dark'];
 
   return (
     <NativeTabs
@@ -14,15 +14,19 @@ export default function AppTabs() {
       indicatorColor={colors.backgroundElement}
       labelStyle={{ selected: { color: colors.text } }}>
       <NativeTabs.Trigger name="index">
+        {/* @ts-ignore */}
         <NativeTabs.Trigger.Label>Horario</NativeTabs.Trigger.Label>
+        {/* @ts-ignore */}
         <NativeTabs.Trigger.Icon
           src={require('@/assets/images/tabIcons/home.png')}
           renderingMode="template"
         />
       </NativeTabs.Trigger>
 
-      <NativeTabs.Trigger name="explore">
+      <NativeTabs.Trigger name="week">
+        {/* @ts-ignore */}
         <NativeTabs.Trigger.Label>Metas</NativeTabs.Trigger.Label>
+        {/* @ts-ignore */}
         <NativeTabs.Trigger.Icon
           src={require('@/assets/images/tabIcons/explore.png')}
           renderingMode="template"

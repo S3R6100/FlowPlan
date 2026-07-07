@@ -5,13 +5,13 @@ import { prisma } from '../lib/prisma.js';
 import { requireAuth, type AuthRequest } from '../middleware/auth.js';
 import { parseDateParam } from '../utils/validation.js';
 import { toEventDto } from '../mappers/event.js';
-import { buildRecommendation } from '../services/planning.js';
+import { plannerService } from '../di.js';
 
 const router = Router();
 router.use(requireAuth);
 
 router.get('/', async (req: AuthRequest, res) => {
-  const date = parseDateParam(req.query.date);
+  const date = parseDateParam(req.query.date as string | undefined);
   if (!date) {
     res.status(400).json({ error: 'Query param date=YYYY-MM-DD es requerido' });
     return;
@@ -31,7 +31,7 @@ router.get('/', async (req: AuthRequest, res) => {
     }))
   );
 
-  const recommendation = await buildRecommendation(req.userId!, date, freeBlocks);
+  const recommendation = await plannerService.getDailyRecommendation(req.userId!, date, freeBlocks);
 
   const response: ScheduleResponseDto = {
     date,

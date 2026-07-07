@@ -33,6 +33,7 @@ export interface Recommendation {
   projectId: string | null;
   routineId?: string | null;
   kind: string;
+  priority?: string;
 }
 
 function dismissKey(date: string) {

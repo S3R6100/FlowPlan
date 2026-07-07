@@ -8,7 +8,7 @@ const router = Router();
 router.use(requireAuth);
 
 router.get('/', async (req: AuthRequest, res) => {
-  const date = parseDateParam(req.query.date);
+  const date = parseDateParam(req.query.date as string | undefined);
   if (!date) {
     res.status(400).json({ error: 'Query param date=YYYY-MM-DD es requerido' });
     return;
@@ -70,7 +70,7 @@ router.patch('/:id', async (req: AuthRequest, res) => {
   }
 
   const existing = await prisma.event.findFirst({
-    where: { id: req.params.id, userId: req.userId! },
+    where: { id: req.params.id as string, userId: req.userId! },
   });
   if (!existing) {
     res.status(404).json({ error: 'Evento no encontrado' });
@@ -106,7 +106,7 @@ router.patch('/:id', async (req: AuthRequest, res) => {
 
 router.delete('/:id', async (req: AuthRequest, res) => {
   const existing = await prisma.event.findFirst({
-    where: { id: req.params.id, userId: req.userId! },
+    where: { id: req.params.id as string, userId: req.userId! },
   });
   if (!existing) {
     res.status(404).json({ error: 'Evento no encontrado' });

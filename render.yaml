@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: flowplan-api
+    env: node
+    buildCommand: npm install && npm run build -w @flowplan/server
+    startCommand: npm run server:start
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: DATABASE_URL
+        fromDatabase:
+          name: flowplan-db
+          property: connectionString
+  - type: psql
+    name: flowplan-db
+    plan: free

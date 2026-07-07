@@ -21,7 +21,7 @@ export const useTasks = () => {
     if (!token) return;
     setIsLoading(true);
     try {
-      const response = await api.get('/tasks');
+      const response = await api.get('/tasks') as any;
       setTasks(response?.tasks ?? []);
     } catch (error) {
       console.error('Error fetching tasks', error);
@@ -35,7 +35,7 @@ export const useTasks = () => {
     if (!token) return;
     setIsLoading(true);
     try {
-      const response = await api.get('/tasks/criticas');
+      const response = await api.get('/tasks/criticas') as any;
       setTasks(response?.tasks ?? []);
     } catch (error) {
       console.error('Error fetching critical tasks', error);

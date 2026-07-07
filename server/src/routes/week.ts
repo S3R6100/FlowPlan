@@ -14,7 +14,7 @@ function resolveWeekKey(queryWeek: unknown): string {
 }
 
 router.get('/profile', async (req: AuthRequest, res) => {
-  const weekKey = resolveWeekKey(req.query.week);
+  const weekKey = resolveWeekKey(req.query.week as string | undefined);
   const profile = await getOrCreateWeekProfile(req.userId!, weekKey);
   res.json({
     profile: {
@@ -60,7 +60,7 @@ router.put('/profile', async (req: AuthRequest, res) => {
 });
 
 router.get('/summary', async (req: AuthRequest, res) => {
-  const weekKey = resolveWeekKey(req.query.week);
+  const weekKey = resolveWeekKey(req.query.week as string | undefined);
   const summary = await buildWeekSummary(req.userId!, weekKey);
   res.json(summary);
 });

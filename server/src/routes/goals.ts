@@ -14,7 +14,7 @@ function resolveWeekKey(queryWeek: unknown): string {
 }
 
 router.get('/', async (req: AuthRequest, res) => {
-  const weekKey = resolveWeekKey(req.query.week);
+  const weekKey = resolveWeekKey(req.query.week as string | undefined);
   const goals = await prisma.weeklyGoal.findMany({
     where: { userId: req.userId!, weekKey },
     orderBy: { title: 'asc' },
@@ -54,7 +54,7 @@ router.patch('/:id', async (req: AuthRequest, res) => {
   }
 
   const existing = await prisma.weeklyGoal.findFirst({
-    where: { id: req.params.id, userId: req.userId! },
+    where: { id: req.params.id as string, userId: req.userId! },
   });
   if (!existing) {
     res.status(404).json({ error: 'Meta no encontrada' });
@@ -84,7 +84,7 @@ router.post('/:id/add-hours', async (req: AuthRequest, res) => {
   }
 
   const existing = await prisma.weeklyGoal.findFirst({
-    where: { id: req.params.id, userId: req.userId! },
+    where: { id: req.params.id as string, userId: req.userId! },
   });
   if (!existing) {
     res.status(404).json({ error: 'Meta no encontrada' });

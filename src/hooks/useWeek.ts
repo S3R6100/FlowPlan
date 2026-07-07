@@ -70,7 +70,7 @@ export const useWeek = () => {
           api.get(`/missions?date=${today}`),
           api.get('/milestones'),
           api.get('/week/profile').catch(() => null),
-        ]);
+        ]) as any[];
 
       const missions = missionsResponse?.missions ?? [];
       const pendingMission =
@@ -137,7 +137,7 @@ export const useWeek = () => {
 
   const toggleRoutine = async (id: string) => {
     try {
-      const res = await api.patch(`/routines/${id}/toggle`, {});
+      const res = await api.patch(`/routines/${id}/toggle`, {}) as any;
       setSummary((prev) => {
         if (!prev) return prev;
         return {

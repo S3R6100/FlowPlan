@@ -16,7 +16,7 @@ router.get('/', async (req: AuthRequest, res) => {
 
 router.patch('/:id/complete', async (req: AuthRequest, res) => {
   const existing = await prisma.milestone.findFirst({
-    where: { id: req.params.id, userId: req.userId! },
+    where: { id: req.params.id as string, userId: req.userId! },
   });
   if (!existing) {
     res.status(404).json({ error: 'Hito no encontrado' });

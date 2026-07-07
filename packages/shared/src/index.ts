@@ -31,6 +31,7 @@ export interface RecommendationDto {
   projectId: string | null;
   routineId?: string | null;
   kind: 'task' | 'goal' | 'routine';
+  priority?: string;
 }
 
 export interface ScheduleResponseDto {
